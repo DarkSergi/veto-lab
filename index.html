@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Veto Lab – Call of Duty Competitivo</title>
+  <meta name="description" content="Herramienta de picks y bans para Call of Duty competitivo: predictor de vetos, simulador A vs B y votación de equipo.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#/">Veto Lab<sup>TM</sup></a>
+    <nav class="site-nav" aria-label="Principal">
+      <a href="#/predictor" data-route="predictor">Predictor</a>
+      <a href="#/draft" data-route="draft">Picks y Bans</a>
+      <a href="#/votes" data-route="votes">Votación</a>
+    </nav>
+  </header>
+
+  <main id="app"></main>
+
+  <footer class="site-footer">
+    <span>Veto Lab / Call of Duty Competitivo</span>
+    <span>Datos guardados en este navegador</span>
+  </footer>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
