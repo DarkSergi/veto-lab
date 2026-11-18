@@ -363,3 +363,121 @@ table.data tr:hover td { background: rgba(157, 123, 255, .05); }
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }
 }
+
+/* ============================================================
+   MÓVIL Y TÁCTIL
+   ============================================================ */
+button, a, select, input, textarea, .tab { touch-action: manipulation; }
+html { -webkit-tap-highlight-color: transparent; -webkit-text-size-adjust: 100%; }
+body { overflow-x: clip; }
+
+/* Pantallas táctiles: sin efectos "hover" que se quedan pegados tras tocar */
+@media (hover: none) {
+  .btn:hover:not(:disabled) { background: transparent; color: inherit; border-color: var(--line-strong); box-shadow: none; transform: none; }
+  .btn.on:hover:not(:disabled) { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+  .btn.danger:hover:not(:disabled) { background: transparent; color: inherit; border-color: var(--line-strong); box-shadow: none; }
+  .btn:active:not(:disabled) { background: var(--acc); border-color: var(--acc); color: #fff; }
+  .vote-btns .btn.play.on:active, .vote-btns .btn.veto.on:active { filter: brightness(.9); }
+  .stepper button:hover { background: none; color: inherit; }
+  .stepper button:active { background: var(--acc); color: #fff; }
+  .map-card.clickable:hover { transform: none; border-color: var(--line); box-shadow: none; }
+  .map-card.clickable:active { transform: scale(.97); border-color: var(--acc); box-shadow: 0 0 0 1px var(--acc); }
+  .menu-item:hover { padding-left: 0; padding-right: 0; }
+  .menu-item:hover::before { transform: translateX(-101%); }
+  .menu-item:hover .arrow { transform: none; }
+  .menu-item:active::before { transform: none; }
+  table.data tr:hover td { background: none; }
+}
+
+@media (max-width: 900px) {
+  /* Campos a 16px: así iOS no hace zoom al tocarlos */
+  input[type="text"], input[type="number"], input[type="password"], select, textarea { font-size: 16px; min-height: 46px; }
+  textarea { font-size: 14px; }
+  .btn { min-height: 46px; padding: 12px 20px; }
+  .btn.small { min-height: 42px; padding: 9px 14px; }
+  .stepper button { width: 44px; height: 44px; font-size: 20px; }
+  .stepper .num { min-width: 44px; font-size: 16px; }
+  .chip { padding: 4px 4px 4px 14px; }
+  .chip button { width: 36px; height: 36px; font-size: 18px; }
+}
+
+@media (max-width: 700px) {
+  :root { --gutter: 16px; }
+  body { padding-bottom: 60px; }
+
+  /* Cabecera compacta; el menú pasa a una barra inferior, al alcance del pulgar */
+  .site-header { position: static; backdrop-filter: none; background: transparent; flex-direction: row; align-items: center; justify-content: space-between; gap: 10px 14px; padding: 14px var(--gutter); }
+  .brand { font-size: 22px; }
+  #team-box { margin-left: auto; gap: 8px !important; }
+  .site-nav {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; gap: 0;
+    background: rgba(8, 8, 12, .97); backdrop-filter: blur(14px);
+    border-top: 1px solid var(--line-strong);
+  }
+  .site-nav a {
+    flex: 1; text-align: center; padding: 18px 4px; font-size: 10.5px; letter-spacing: .12em;
+    border-bottom: 0; border-top: 2px solid transparent; margin-top: -1px;
+  }
+  .site-nav a.active { border-top-color: var(--acc); background: linear-gradient(180deg, rgba(157, 123, 255, .18), transparent); }
+  .toast { bottom: 76px; }
+  .site-footer { padding: 22px var(--gutter); }
+
+  /* Portada */
+  .hero { padding: 36px 0 32px; }
+  .menu-item { padding: 24px 0; }
+  .menu-item:active { background: var(--bg-2); }
+  .pool-strip { gap: 22px; margin-top: 36px; }
+  .pool-strip > div { min-width: 0; flex: 1 1 140px; }
+  .pool-strip .big { font-size: 48px; }
+  .page-head { padding: 28px 0 24px; margin-bottom: 24px; }
+  .grid-2 { gap: 24px; }
+  .panel { padding: 18px 16px; }
+
+  /* Pestañas de modo: tres bloques iguales, sin deslizar */
+  .tabs { display: grid; grid-template-columns: repeat(3, 1fr); overflow: visible; margin: 20px 0; }
+  .tab { margin-right: 0; padding: 14px 4px; text-align: center; font-size: 10px; letter-spacing: .1em; line-height: 1.3; white-space: normal; }
+
+  /* Predictor: la tabla se convierte en una tarjeta por mapa */
+  table.data:has(.stepper), table.data:has(.stepper) tbody { display: block; }
+  table.data:has(.stepper) thead { display: none; }
+  table.data:has(.stepper) tr { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 12px; padding: 16px 0; border-top: 1px solid var(--line); }
+  table.data:has(.stepper) td { border: 0; padding: 0; }
+  table.data:has(.stepper) td:nth-child(1) { grid-column: 1 / -1; font-family: var(--display); text-transform: uppercase; font-size: 24px; letter-spacing: .04em; line-height: 1.1; }
+  table.data:has(.stepper) td:nth-child(2)::before, table.data:has(.stepper) td:nth-child(3)::before,
+  table.data:has(.stepper) td:nth-child(4)::before, table.data:has(.stepper) td:nth-child(5)::before {
+    display: block; font-family: var(--mono); font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--mut); margin-bottom: 6px;
+  }
+  table.data:has(.stepper) td:nth-child(2)::before { content: 'Vetos'; }
+  table.data:has(.stepper) td:nth-child(3)::before { content: 'Picks'; }
+  table.data:has(.stepper) td:nth-child(4)::before { content: 'Veto %'; margin-bottom: 0; display: inline; margin-right: 8px; }
+  table.data:has(.stepper) td:nth-child(5)::before { content: 'Pick %'; margin-bottom: 0; display: inline; margin-right: 8px; }
+  table.data:has(.stepper) tr:hover td { background: none; }
+
+  /* Picks y bans: el turno actual se queda visible mientras bajas por los mapas */
+  .banner { position: sticky; top: 8px; z-index: 15; padding: 16px 16px; background-color: #0b0912; }
+  .banner .what { font-size: 26px; }
+  .mode-block { margin-top: 30px; }
+  .mode-block > .head h3 { font-size: 24px; }
+  .map-grid { gap: 10px; }
+  .map-card .body { padding: 10px 12px 12px; }
+  .map-card .status { line-height: 1.35; }
+  .vote-btns .btn { min-height: 48px; padding: 10px 4px; }
+  .setup-grid { grid-template-columns: 1fr; gap: 16px; }
+  .game-slot select { min-width: 110px; }
+  .timeline li { grid-template-columns: 32px 1fr auto; }
+  .row { gap: 10px; }
+  .row > .field { flex: 1 1 200px; }
+}
+
+@media (max-width: 380px) {
+  .brand { font-size: 19px; }
+  .menu-item .title { font-size: 28px; }
+  .map-card .name { font-size: 18px; }
+}
+
+@media (max-width: 700px) {
+  .brand { padding: 10px 0; }
+  .mode-block > .head { align-items: center; }
+  .mode-block > .head h3 { line-height: 1.1; }
+  .mode-block > .head .label { white-space: nowrap; }
+}
