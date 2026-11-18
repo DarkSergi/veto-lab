@@ -34,6 +34,7 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -73,7 +74,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .brand { font-family: var(--display); font-size: 24px; letter-spacing: .08em; text-transform: uppercase; line-height: 1; display: inline-flex; align-items: flex-start; gap: 3px; }
 .brand::before { content: ''; width: 8px; height: 8px; background: var(--acc); box-shadow: 0 0 12px var(--acc); margin: 4px 8px 0 0; }
 .brand sup { font-family: var(--mono); font-size: 8px; letter-spacing: .1em; color: var(--mut); margin-left: 2px; }
-.site-nav { display: flex; gap: clamp(14px, 3vw, 34px); }
+.site-nav { display: flex; flex-wrap: wrap; gap: 4px clamp(14px, 3vw, 34px); }
 .site-nav a {
   font-family: var(--mono); font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--mut);
   padding: 6px 0; border-bottom: 2px solid transparent;
@@ -102,7 +103,7 @@ main.enter { animation: enter .6s var(--ease) both; }
 h1 {
   font-family: var(--display); font-weight: 400; text-transform: uppercase;
   letter-spacing: .01em; line-height: .88;
-  font-size: clamp(64px, 15vw, 230px);
+  font-size: clamp(48px, 15vw, 230px);
   text-shadow: 0 0 60px rgba(157, 123, 255, .35);
 }
 h1 sup { font-family: var(--mono); font-size: clamp(10px, .09em, 20px); letter-spacing: .1em; vertical-align: top; margin-left: .3em; color: var(--acc); text-shadow: none; }
@@ -187,11 +188,11 @@ textarea { width: 100%; min-height: 90px; resize: vertical; font-family: var(--m
 .row.center { align-items: center; }
 .spacer { flex: 1; }
 
-.tabs { display: flex; gap: 0; border-bottom: 1px solid var(--line); margin: 28px 0; overflow-x: auto; }
+.tabs { display: grid; grid-template-columns: repeat(auto-fit, minmax(clamp(96px, 28vw, 180px), 1fr)); max-width: 720px; border-bottom: 1px solid var(--line); margin: 28px 0; }
 .tab {
-  background: none; border: 0; cursor: pointer; padding: 12px 0; margin-right: 30px;
+  background: none; border: 0; cursor: pointer; padding: 14px 8px; margin-right: 0; text-align: center; line-height: 1.3;
   font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--mut);
-  border-bottom: 2px solid transparent; margin-bottom: -1px; white-space: nowrap;
+  border-bottom: 2px solid transparent; margin-bottom: -1px; white-space: normal;
   transition: color .25s var(--ease), border-color .25s var(--ease), text-shadow .25s var(--ease);
 }
 .tab:hover { color: var(--fg); }
@@ -205,7 +206,8 @@ textarea { width: 100%; min-height: 90px; resize: vertical; font-family: var(--m
 /* ---------- Paneles ---------- */
 .grid-2 { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: clamp(24px, 4vw, 64px); align-items: start; }
 .panel {
-  position: relative; border: 1px solid var(--line); padding: clamp(18px, 2.4vw, 32px);
+  position: relative; border: 1px solid var(--line); padding: clamp(16px, 2.4vw, 32px);
+  container-type: inline-size; container-name: panel; min-width: 0; overflow-x: auto;
   background: linear-gradient(180deg, rgba(255, 255, 255, .035), rgba(255, 255, 255, .012));
 }
 /* Esquinas marcadas, como un cartel */
@@ -241,7 +243,7 @@ table.data tr:hover td { background: rgba(157, 123, 255, .05); }
 .tag.pick { color: var(--pick); border-color: var(--pick); box-shadow: 0 0 14px rgba(53, 224, 138, .22); }
 
 /* ---------- Tarjetas de mapa (estilo cartel) ---------- */
-.map-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
+.map-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(clamp(132px, 22vw, 210px), 1fr)); gap: clamp(10px, 1.6vw, 16px); }
 .map-card {
   position: relative; display: flex; flex-direction: column; text-align: left; overflow: hidden;
   background: var(--bg-2); border: 1px solid var(--line); border-radius: 0; padding: 0; cursor: default;
@@ -305,7 +307,7 @@ table.data tr:hover td { background: rgba(157, 123, 255, .05); }
 @keyframes pulse { 0%, 100% { box-shadow: 0 0 0 rgba(157, 123, 255, 0); } 50% { box-shadow: 0 0 34px rgba(157, 123, 255, .3); } }
 
 .mode-block { margin-top: 40px; }
-.mode-block > .head { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid var(--line); }
+.mode-block > .head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 12px; align-items: baseline; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid var(--line); }
 .mode-block > .head h3 { font-family: var(--display); font-weight: 400; font-size: 28px; letter-spacing: .05em; }
 .mode-block.current > .head { border-color: var(--acc); }
 .mode-block.current > .head h3 { color: var(--fg); text-shadow: 0 0 18px var(--acc-glow); }
@@ -346,7 +348,7 @@ table.data tr:hover td { background: rgba(157, 123, 255, .05); }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 900px) {
-  .grid-2 { grid-template-columns: 1fr; }
+  .grid-2 { grid-template-columns: minmax(0, 1fr); }
   .menu-item { grid-template-columns: 44px 1fr 28px; gap: 8px 14px; padding: 26px 0; }
   .menu-item .desc { grid-column: 2 / 3; grid-row: 2; }
   .menu-item .arrow { grid-row: 1; grid-column: 3; }
@@ -365,13 +367,55 @@ table.data tr:hover td { background: rgba(157, 123, 255, .05); }
 }
 
 /* ============================================================
-   MÓVIL Y TÁCTIL
+   ADAPTACIÓN A CUALQUIER PANTALLA
+   · Medidas fluidas (clamp, auto-fit, minmax(0, …)) en vez de tamaños fijos.
+   · Los paneles se adaptan al ancho de SU contenedor (@container), no sólo al de la ventana.
+   · Lo táctil se detecta con (pointer: coarse), no por el ancho.
    ============================================================ */
-button, a, select, input, textarea, .tab { touch-action: manipulation; }
-html { -webkit-tap-highlight-color: transparent; -webkit-text-size-adjust: 100%; }
+html { -webkit-tap-highlight-color: transparent; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 body { overflow-x: clip; }
+img, svg, video { max-width: 100%; height: auto; }
+button, a, select, input, textarea { touch-action: manipulation; }
+/* Sin esto, un hijo de flex/grid no se encoge y empuja la página fuera de la pantalla */
+.grid-2 > *, .row > *, .field, .setup-grid > *, .game-slot, .menu-item > *, .banner > *, .pred-row > * { min-width: 0; }
+h1, h2, h3, .name, .title, .chip, .status, .who, .lead, .note { overflow-wrap: anywhere; }
+.site-header { flex-wrap: wrap; }
+#team-box { flex-wrap: wrap; justify-content: flex-end; }
 
-/* Pantallas táctiles: sin efectos "hover" que se quedan pegados tras tocar */
+/* Tablas con contadores: cada mapa pasa a ser una tarjeta cuando el panel es estrecho */
+@container panel (max-width: 560px) {
+  table.data:has(.stepper), table.data:has(.stepper) tbody { display: block; }
+  table.data:has(.stepper) thead { display: none; }
+  table.data:has(.stepper) tr { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 12px; padding: 16px 0; border-top: 1px solid var(--line); }
+  table.data:has(.stepper) td { border: 0; padding: 0; }
+  table.data:has(.stepper) td:nth-child(1) { grid-column: 1 / -1; font-family: var(--display); text-transform: uppercase; font-size: 24px; letter-spacing: .04em; line-height: 1.1; }
+  table.data:has(.stepper) td:nth-child(n+2)::before { font-family: var(--mono); font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--mut); }
+  table.data:has(.stepper) td:nth-child(2)::before { content: 'Vetos'; display: block; margin-bottom: 6px; }
+  table.data:has(.stepper) td:nth-child(3)::before { content: 'Picks'; display: block; margin-bottom: 6px; }
+  table.data:has(.stepper) td:nth-child(4)::before { content: 'Veto %'; margin-right: 8px; }
+  table.data:has(.stepper) td:nth-child(5)::before { content: 'Pick %'; margin-right: 8px; }
+  table.data:has(.stepper) tr:hover td { background: none; }
+  .panel > h3 { flex-wrap: wrap; }
+}
+@container panel (max-width: 420px) {
+  table.data td { padding-right: 6px; }
+  table.data th { padding-right: 6px; letter-spacing: .1em; }
+}
+
+/* Táctil: objetivos grandes y campos a 16px (así iOS no hace zoom al tocarlos) */
+@media (pointer: coarse), (max-width: 900px) {
+  input[type="text"], input[type="number"], input[type="password"], select, textarea { font-size: 16px; min-height: 46px; }
+  textarea { font-size: 14px; }
+  .btn { min-height: 46px; padding: 12px 20px; }
+  .btn.small { min-height: 42px; padding: 9px 14px; }
+  .stepper button { width: 44px; height: 44px; font-size: 20px; }
+  .stepper .num { min-width: 44px; font-size: 16px; }
+  .chip { padding: 4px 4px 4px 14px; }
+  .chip button { width: 36px; height: 36px; font-size: 18px; }
+  .vote-btns .btn { min-height: 48px; padding: 10px 4px; }
+}
+
+/* Sin ratón: nada de efectos "hover" que se quedan pegados al tocar */
 @media (hover: none) {
   .btn:hover:not(:disabled) { background: transparent; color: inherit; border-color: var(--line-strong); box-shadow: none; transform: none; }
   .btn.on:hover:not(:disabled) { background: var(--fg); color: var(--bg); border-color: var(--fg); }
@@ -389,41 +433,24 @@ body { overflow-x: clip; }
   table.data tr:hover td { background: none; }
 }
 
-@media (max-width: 900px) {
-  /* Campos a 16px: así iOS no hace zoom al tocarlos */
-  input[type="text"], input[type="number"], input[type="password"], select, textarea { font-size: 16px; min-height: 46px; }
-  textarea { font-size: 14px; }
-  .btn { min-height: 46px; padding: 12px 20px; }
-  .btn.small { min-height: 42px; padding: 9px 14px; }
-  .stepper button { width: 44px; height: 44px; font-size: 20px; }
-  .stepper .num { min-width: 44px; font-size: 16px; }
-  .chip { padding: 4px 4px 4px 14px; }
-  .chip button { width: 36px; height: 36px; font-size: 18px; }
-}
-
+/* Móvil: menú inferior, al alcance del pulgar */
 @media (max-width: 700px) {
   :root { --gutter: 16px; }
   body { padding-bottom: 60px; }
-
-  /* Cabecera compacta; el menú pasa a una barra inferior, al alcance del pulgar */
-  .site-header { position: static; backdrop-filter: none; background: transparent; flex-direction: row; align-items: center; justify-content: space-between; gap: 10px 14px; padding: 14px var(--gutter); }
-  .brand { font-size: 22px; }
+  .site-header { position: static; backdrop-filter: none; background: transparent; flex-direction: row; align-items: center; justify-content: space-between; gap: 6px 14px; padding: 12px var(--gutter); }
+  .brand { font-size: 22px; padding: 10px 0; }
   #team-box { margin-left: auto; gap: 8px !important; }
   .site-nav {
-    position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; gap: 0;
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; gap: 0; flex-wrap: nowrap;
     background: rgba(8, 8, 12, .97); backdrop-filter: blur(14px);
     border-top: 1px solid var(--line-strong);
   }
-  .site-nav a {
-    flex: 1; text-align: center; padding: 18px 4px; font-size: 10.5px; letter-spacing: .12em;
-    border-bottom: 0; border-top: 2px solid transparent; margin-top: -1px;
-  }
+  .site-nav a { flex: 1; text-align: center; padding: 18px 4px; font-size: 10.5px; letter-spacing: .12em; border-bottom: 0; border-top: 2px solid transparent; margin-top: -1px; }
   .site-nav a.active { border-top-color: var(--acc); background: linear-gradient(180deg, rgba(157, 123, 255, .18), transparent); }
   .toast { bottom: 76px; }
   .site-footer { padding: 22px var(--gutter); }
 
-  /* Portada */
-  .hero { padding: 36px 0 32px; }
+  .hero { padding: 32px 0 28px; }
   .menu-item { padding: 24px 0; }
   .menu-item:active { background: var(--bg-2); }
   .pool-strip { gap: 22px; margin-top: 36px; }
@@ -432,52 +459,41 @@ body { overflow-x: clip; }
   .page-head { padding: 28px 0 24px; margin-bottom: 24px; }
   .grid-2 { gap: 24px; }
   .panel { padding: 18px 16px; }
+  .tabs { margin: 20px 0; max-width: none; }
+  .tab { font-size: 10px; letter-spacing: .1em; }
 
-  /* Pestañas de modo: tres bloques iguales, sin deslizar */
-  .tabs { display: grid; grid-template-columns: repeat(3, 1fr); overflow: visible; margin: 20px 0; }
-  .tab { margin-right: 0; padding: 14px 4px; text-align: center; font-size: 10px; letter-spacing: .1em; line-height: 1.3; white-space: normal; }
-
-  /* Predictor: la tabla se convierte en una tarjeta por mapa */
-  table.data:has(.stepper), table.data:has(.stepper) tbody { display: block; }
-  table.data:has(.stepper) thead { display: none; }
-  table.data:has(.stepper) tr { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 12px; padding: 16px 0; border-top: 1px solid var(--line); }
-  table.data:has(.stepper) td { border: 0; padding: 0; }
-  table.data:has(.stepper) td:nth-child(1) { grid-column: 1 / -1; font-family: var(--display); text-transform: uppercase; font-size: 24px; letter-spacing: .04em; line-height: 1.1; }
-  table.data:has(.stepper) td:nth-child(2)::before, table.data:has(.stepper) td:nth-child(3)::before,
-  table.data:has(.stepper) td:nth-child(4)::before, table.data:has(.stepper) td:nth-child(5)::before {
-    display: block; font-family: var(--mono); font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--mut); margin-bottom: 6px;
-  }
-  table.data:has(.stepper) td:nth-child(2)::before { content: 'Vetos'; }
-  table.data:has(.stepper) td:nth-child(3)::before { content: 'Picks'; }
-  table.data:has(.stepper) td:nth-child(4)::before { content: 'Veto %'; margin-bottom: 0; display: inline; margin-right: 8px; }
-  table.data:has(.stepper) td:nth-child(5)::before { content: 'Pick %'; margin-bottom: 0; display: inline; margin-right: 8px; }
-  table.data:has(.stepper) tr:hover td { background: none; }
-
-  /* Picks y bans: el turno actual se queda visible mientras bajas por los mapas */
-  .banner { position: sticky; top: 8px; z-index: 15; padding: 16px 16px; background-color: #0b0912; }
+  /* En "Picks y bans" el turno actual se queda visible al bajar por los mapas */
+  .banner { position: sticky; top: 8px; z-index: 15; padding: 16px; background-color: #0b0912; }
   .banner .what { font-size: 26px; }
   .mode-block { margin-top: 30px; }
-  .mode-block > .head h3 { font-size: 24px; }
-  .map-grid { gap: 10px; }
+  .mode-block > .head { align-items: center; }
+  .mode-block > .head h3 { font-size: 24px; line-height: 1.1; }
   .map-card .body { padding: 10px 12px 12px; }
+  .map-card .name { font-size: clamp(17px, 5vw, 22px); }
   .map-card .status { line-height: 1.35; }
-  .vote-btns .btn { min-height: 48px; padding: 10px 4px; }
-  .setup-grid { grid-template-columns: 1fr; gap: 16px; }
+  .map-card.banned::after, .map-card.picked::after { font-size: 20px; }
+  .setup-grid { grid-template-columns: minmax(0, 1fr); gap: 16px; }
   .game-slot select { min-width: 110px; }
-  .timeline li { grid-template-columns: 32px 1fr auto; }
+  .timeline li { grid-template-columns: 32px minmax(0, 1fr) auto; }
   .row { gap: 10px; }
   .row > .field { flex: 1 1 200px; }
+}
+
+/* Móvil en horizontal: poca altura, así que todo más compacto */
+@media (max-width: 700px) and (max-height: 480px) {
+  body { padding-bottom: 46px; }
+  .site-nav a { padding: 10px 4px; }
+  .banner { position: static; }
+  .toast { bottom: 58px; }
 }
 
 @media (max-width: 380px) {
   .brand { font-size: 19px; }
   .menu-item .title { font-size: 28px; }
-  .map-card .name { font-size: 18px; }
+  .stepper button, .stepper .num { width: 40px; min-width: 40px; }
 }
 
-@media (max-width: 700px) {
-  .brand { padding: 10px 0; }
-  .mode-block > .head { align-items: center; }
-  .mode-block > .head h3 { line-height: 1.1; }
-  .mode-block > .head .label { white-space: nowrap; }
+/* Tablet: si el equipo baja a una segunda línea, que quede alineado a la derecha */
+@media (min-width: 701px) and (max-width: 1050px) {
+  #team-box { margin-left: auto; }
 }
